@@ -2,16 +2,14 @@
 
 #include "IInput.h"
 
-#include <SDL3/SDL.h>
-
 #include <cstdint>
 #include <deque>
 
-class SDL3Input final : public IInput
+class Win32Input final : public IInput
 {
 public:
-    SDL3Input();
-    ~SDL3Input() override;
+    Win32Input();
+    ~Win32Input() override;
 
     bool Init() override;
     void Destroy() override;
@@ -28,15 +26,13 @@ public:
     bool PollNext(InputEvent& out) override;
 
 private:
-    static int TranslateKey(int sdlKey);
+    static int TranslateKey(int nativeKeyCode);
     static int TranslateGamepadButton(int button);
     static void TranslateGamepadAxis(int axis, int& outNegativeCode, int& outPositiveCode);
 
     void SetSource(uint32_t sourceId, int code, bool isDown);
     void ClearAllSources();
 
-    SDL_Gamepad* Gamepad = nullptr;
-    SDL_JoystickID GamepadId = 0;
     float MouseDeltaRemainderX = 0.0f;
     float MouseDeltaRemainderY = 0.0f;
 

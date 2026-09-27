@@ -12,6 +12,11 @@ public:
     virtual bool Init() = 0;
     virtual void Destroy() = 0;
 
+    // Called once per host frame from the main thread so backends that avoid
+    // touching OS audio APIs from callbacks/other threads can service completed
+    // buffers here instead.
+    virtual void Update() = 0;
+
     virtual SoundHandle CreateSound(int soundId, int maxPolyphony) = 0;
     virtual void DestroySound(SoundHandle sound) = 0;
 

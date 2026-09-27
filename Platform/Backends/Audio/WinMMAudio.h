@@ -2,14 +2,15 @@
 
 #include "IAudio.h"
 
-class SDL3Audio final : public IAudio
+class WinMMAudio final : public IAudio
 {
 public:
-    SDL3Audio();
-    ~SDL3Audio() override;
+    WinMMAudio();
+    ~WinMMAudio() override;
 
     bool Init() override;
     void Destroy() override;
+    void Update() override;
 
     SoundHandle CreateSound(int soundId, int maxPolyphony) override;
     void DestroySound(SoundHandle sound) override;

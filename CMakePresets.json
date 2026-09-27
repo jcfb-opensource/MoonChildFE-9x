@@ -2,160 +2,36 @@
   "version": 4,
   "configurePresets": [
     {
-      "name": "windowsx64",
-      "generator": "Ninja Multi-Config",
-      "toolchainFile": "${sourceDir}/CMake/Toolchains/Windows.cmake",
-      "binaryDir": "${sourceDir}/CMakeOut/WindowsX64",
+      "name": "win98-debug",
+      "generator": "MinGW Makefiles",
+      "toolchainFile": "${sourceDir}/CMake/Toolchains/Win98MinGW.cmake",
+      "binaryDir": "${sourceDir}/CMakeOut/Win98/Debug",
       "cacheVariables": {
-        "MOONCHILD_TARGET_ARCH": "WindowsX64",
-        "CMAKE_C_COMPILER": "clang-cl",
-        "CMAKE_CXX_COMPILER": "clang-cl",
-        "CMAKE_C_FLAGS_DEBUG": "/Od",
-        "CMAKE_CXX_FLAGS_DEBUG": "/Od",
-        "CMAKE_C_FLAGS_RELEASE": "/O2 /GL /fp:fast",
-        "CMAKE_CXX_FLAGS_RELEASE": "/O2 /GL /fp:fast",
-        "CMAKE_EXE_LINKER_FLAGS_RELEASE": "/LTCG",
-        "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "/LTCG"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_FLAGS_DEBUG": "-Og -g",
+        "CMAKE_CXX_FLAGS_DEBUG": "-Og -g"
       }
     },
     {
-      "name": "windowsx86",
-      "generator": "Ninja Multi-Config",
-      "toolchainFile": "${sourceDir}/CMake/Toolchains/Windows.cmake",
-      "binaryDir": "${sourceDir}/CMakeOut/WindowsX86",
+      "name": "win98-release",
+      "generator": "MinGW Makefiles",
+      "toolchainFile": "${sourceDir}/CMake/Toolchains/Win98MinGW.cmake",
+      "binaryDir": "${sourceDir}/CMakeOut/Win98/Release",
       "cacheVariables": {
-        "MOONCHILD_TARGET_ARCH": "WindowsX86",
-        "CMAKE_C_COMPILER": "clang-cl",
-        "CMAKE_CXX_COMPILER": "clang-cl",
-        "CMAKE_C_FLAGS_DEBUG": "/Od",
-        "CMAKE_CXX_FLAGS_DEBUG": "/Od",
-        "CMAKE_C_FLAGS_RELEASE": "/O2 /GL /fp:fast",
-        "CMAKE_CXX_FLAGS_RELEASE": "/O2 /GL /fp:fast",
-        "CMAKE_EXE_LINKER_FLAGS_RELEASE": "/LTCG",
-        "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "/LTCG"
-      }
-    },
-    {
-      "name": "linuxx64",
-      "generator": "Ninja Multi-Config",
-      "toolchainFile": "${sourceDir}/CMake/Toolchains/Linux.cmake",
-      "binaryDir": "${sourceDir}/CMakeOut/LinuxX64",
-      "cacheVariables": {
-        "MOONCHILD_TARGET_ARCH": "LinuxX64",
-        "CMAKE_C_COMPILER": "clang",
-        "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_C_FLAGS_DEBUG": "-O0",
-        "CMAKE_CXX_FLAGS_DEBUG": "-O0",
-        "CMAKE_C_FLAGS_RELEASE": "-O3",
-        "CMAKE_CXX_FLAGS_RELEASE": "-O3"
-      }
-    },
-    {
-      "name": "linuxarm64",
-      "generator": "Ninja Multi-Config",
-      "toolchainFile": "${sourceDir}/CMake/Toolchains/Linux.cmake",
-      "binaryDir": "${sourceDir}/CMakeOut/LinuxArm64",
-      "cacheVariables": {
-        "MOONCHILD_TARGET_ARCH": "LinuxArm64",
-        "CMAKE_C_COMPILER": "clang",
-        "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_C_FLAGS_DEBUG": "-O0",
-        "CMAKE_CXX_FLAGS_DEBUG": "-O0",
-        "CMAKE_C_FLAGS_RELEASE": "-O3",
-        "CMAKE_CXX_FLAGS_RELEASE": "-O3"
-      }
-    },
-    {
-      "name": "web",
-      "generator": "Ninja Multi-Config",
-      "toolchainFile": "${sourceDir}/CMake/Toolchains/Web.cmake",
-      "binaryDir": "${sourceDir}/CMakeOut/Web",
-      "cacheVariables": {
-        "MOONCHILD_TARGET_ARCH": "Web",
-        "CMAKE_C_FLAGS_DEBUG": "-O0",
-        "CMAKE_CXX_FLAGS_DEBUG": "-O0",
-        "CMAKE_C_FLAGS_RELEASE": "-O3",
-        "CMAKE_CXX_FLAGS_RELEASE": "-O3",
-        "CMAKE_EXE_LINKER_FLAGS_DEBUG": "-O0",
-        "CMAKE_EXE_LINKER_FLAGS_RELEASE": "-O3"
-      }
-    },
-    {
-      "name": "macosuniversal",
-      "generator": "Ninja Multi-Config",
-      "toolchainFile": "${sourceDir}/CMake/Toolchains/MacOS.cmake",
-      "binaryDir": "${sourceDir}/CMakeOut/macOSUniversal",
-      "cacheVariables": {
-        "MOONCHILD_TARGET_ARCH": "macOSUniversal",
-        "CMAKE_C_FLAGS_DEBUG": "-O0",
-        "CMAKE_CXX_FLAGS_DEBUG": "-O0",
-        "CMAKE_C_FLAGS_RELEASE": "-O3",
-        "CMAKE_CXX_FLAGS_RELEASE": "-O3",
-        "CMAKE_OSX_ARCHITECTURES": "x86_64;arm64",
-        "CMAKE_OSX_DEPLOYMENT_TARGET": "11.0"
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG -fomit-frame-pointer",
+        "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG -fomit-frame-pointer"
       }
     }
   ],
   "buildPresets": [
     {
-      "name": "build-windowsx64-debug",
-      "configurePreset": "windowsx64",
-      "configuration": "Debug"
+      "name": "build-win98-debug",
+      "configurePreset": "win98-debug"
     },
     {
-      "name": "build-windowsx64-release",
-      "configurePreset": "windowsx64",
-      "configuration": "Release"
-    },
-    {
-      "name": "build-windowsx86-debug",
-      "configurePreset": "windowsx86",
-      "configuration": "Debug"
-    },
-    {
-      "name": "build-windowsx86-release",
-      "configurePreset": "windowsx86",
-      "configuration": "Release"
-    },
-    {
-      "name": "build-linuxx64-debug",
-      "configurePreset": "linuxx64",
-      "configuration": "Debug"
-    },
-    {
-      "name": "build-linuxx64-release",
-      "configurePreset": "linuxx64",
-      "configuration": "Release"
-    },
-    {
-      "name": "build-linuxarm64-debug",
-      "configurePreset": "linuxarm64",
-      "configuration": "Debug"
-    },
-    {
-      "name": "build-linuxarm64-release",
-      "configurePreset": "linuxarm64",
-      "configuration": "Release"
-    },
-    {
-      "name": "build-web-debug",
-      "configurePreset": "web",
-      "configuration": "Debug"
-    },
-    {
-      "name": "build-web-release",
-      "configurePreset": "web",
-      "configuration": "Release"
-    },
-    {
-      "name": "build-macosuniversal-debug",
-      "configurePreset": "macosuniversal",
-      "configuration": "Debug"
-    },
-    {
-      "name": "build-macosuniversal-release",
-      "configurePreset": "macosuniversal",
-      "configuration": "Release"
+      "name": "build-win98-release",
+      "configurePreset": "win98-release"
     }
   ]
 }

@@ -1,6 +1,38 @@
 #ifndef _FRAMEWORK_KEYS_HPP
 #define _FRAMEWORK_KEYS_HPP
 
+// If <windows.h> was already included in this translation unit, it will have
+// defined several of these as macros (with the same numeric values). Undef
+// them first so the constexpr declarations below don't get mangled by the
+// preprocessor.
+#ifdef VK_BACK
+#undef VK_BACK
+#endif
+#ifdef VK_TAB
+#undef VK_TAB
+#endif
+#ifdef VK_RETURN
+#undef VK_RETURN
+#endif
+#ifdef VK_SHIFT
+#undef VK_SHIFT
+#endif
+#ifdef VK_ESCAPE
+#undef VK_ESCAPE
+#endif
+#ifdef VK_LEFT
+#undef VK_LEFT
+#endif
+#ifdef VK_UP
+#undef VK_UP
+#endif
+#ifdef VK_RIGHT
+#undef VK_RIGHT
+#endif
+#ifdef VK_DOWN
+#undef VK_DOWN
+#endif
+
 static constexpr int VK_BACK   = 0x08;
 static constexpr int VK_TAB    = 0x09;
 static constexpr int VK_RETURN = 0x0D;

@@ -601,8 +601,10 @@ void Cvideo::ConvertPalToDib(void)
 		r = m_Palette[i*3 + 0]>>3;
 		g = m_Palette[i*3 + 1]>>2;
 		b = m_Palette[i*3 + 2]>>3;
-		// This was originally BGR, but I'm changing it to RGB here to make porting easier -Mors
-        m_DibPalette32[i] = (m_Palette[i*3 + 0]) | (m_Palette[i*3 + 1]<<8) | (m_Palette[i*3 + 2]<<16) | (255<<24);
+		// GDI's 32bpp DIBs are natively BGRA, so store it that way here to avoid
+		// a per-pixel channel swap in the renderer every frame (see MovieBridge.cpp
+		// for the FMV decode path, which must match this order too).
+        m_DibPalette32[i] = (m_Palette[i*3 + 2]) | (m_Palette[i*3 + 1]<<8) | (m_Palette[i*3 + 0]<<16) | (255<<24);
    
         
 		m_DibPalette[i] = (b) + (g<<5) + (r<<11);

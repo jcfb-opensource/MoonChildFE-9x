@@ -20,7 +20,8 @@ extern unsigned short gamespeedflg;
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 #else
-#include <thread>
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #endif
 
 extern int g_SettingsFlg;
@@ -148,6 +149,7 @@ void Host::RunFrame()
     bool exitRequested = false;
     Backends.Window->SetRelativeMouseMode(framework_WantRelativeMouse() != 0);
     Backends.Window->PumpOSEvents(Backends.Input.get(), exitRequested);
+    Backends.Audio->Update();
 
     const int fps = (gamespeedflg == 1u) ? 50 : 60;
     const bool shouldShow = framework_ShouldShowCursor() != 0 && (InputBridge::GetMouseIdleFrames() < 3 * fps);
@@ -188,6 +190,7 @@ void Host::RunFrame()
             }
         }
         TickFramework(tickDuration);
+        Backends.Audio->Update();
         Accumulator -= tickNs;
         advancedFrame = true;
     }
@@ -297,7 +300,7 @@ int Host::Run()
     while (Running)
     {
         RunFrame();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        Sleep(1);
     }
     Shutdown();
 #endif

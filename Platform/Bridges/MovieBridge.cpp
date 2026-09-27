@@ -87,9 +87,11 @@ static void OnVideo(plm_t* /*plm*/, plm_frame_t* frame, void* /*user*/)
             const int sx = (x * sw) / dw;
             const uint8_t* s = srcRow + sx * 4;
             uint8_t* d = dstRow + x * 4;
-            d[0] = s[0];
+            // pl_mpeg decodes to RGBA, but the host framebuffer is BGRA (see
+            // Cvideo::ConvertPalToDib) - swap R/B to match.
+            d[0] = s[2];
             d[1] = s[1];
-            d[2] = s[2];
+            d[2] = s[0];
             d[3] = 0xFF;
         }
     }
