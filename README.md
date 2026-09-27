@@ -25,7 +25,7 @@ This port is based on the game's later iOS release, with various features (like 
 Remember, you've got the power to be his friend!
 
 
-## Windows 98 port (this fork)
+## Windows 98 port (this repository)
 
 This is a stripped-down source port of Moon Child FE that targets **Windows 9x** specifically, in the
 spirit of the original 1997 release. Compared to the source port described above, it:
