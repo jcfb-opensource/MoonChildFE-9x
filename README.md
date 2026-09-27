@@ -77,6 +77,40 @@ cd MoonChildFE
 
 The executable will end up in the `Bin\Win98` folder, alongside a `data` folder copied from `Data\`.
 
+### Linux (cross-compiling for Windows 98)
+
+1. Install the required tools and the `i686-w64-mingw32` toolchain from your Linux distribution's package repositories. The exact package names vary between distributions. You will need a 32-bit MinGW-w64 GCC toolchain, CMake, Git, and the usual build tools.
+
+2. On alternative, obtain the Pentium-compatible toolchain from the DiscordMessenger project as described here:
+
+   https://github.com/DiscordMessenger/dm/blob/master/doc/pentium-toolchain/README.md
+
+   Follow the instructions to build the toolchain.
+
+3. Add the built toolchain folder to your `PATH`. This should be the folder containing the toolchain's `bin`, `include`, `lib`, etc. directories. For example:
+
+   ```bash
+   export PATH="/path/to/pentium-toolchain/mingw-builds/install/cross/bin:$PATH"
+   ```
+   (Replace /path/to/pentium-toolchain with the location of your built toolchain).
+   
+4. Clone the repository with submodules and enter it:
+   ```bash
+   git clone --recursive https://github.com/MorsGames/MoonChildFE.git
+   cd MoonChildFE   
+   ```
+
+5. The build process is mostly the same as on Windows. Use the Win98 CMake presets:
+   ```bash
+   cmake --preset win98-debug
+   cmake --build --preset build-win98-debug
+   ```
+   Or, for a release build:
+   ```bash
+   cmake --preset win98-release
+   cmake --build --preset build-win98-release
+   ```
+   The executable will end up in the Bin/Win98 folder, alongside a data folder copied from Data/.
 
 ### Linux (mainline project only - not part of this fork)
 
